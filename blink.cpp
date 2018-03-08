@@ -1,17 +1,19 @@
+#include "Arduino.h"
 #include "blink.h"
-
 Blink::Blink(int pin)
 {
   pinMode(pin, OUTPUT);
   _pin = pin;
 }
-void Blink::on()
+void Blink::on(int time)
 {
-  digitalWrite(_pin,HIGH);
-  delay(500);
-}
-void Blink::off()
-{
+  _time=time;
   digitalWrite(_pin,LOW);
-  dealy(300);
+  delay(_time);
+}
+void Blink::off(int time)
+{
+  _time=time;
+  digitalWrite(_pin,HIGH  );
+  delay(_time);
 }
