@@ -8,5 +8,5 @@ void setup()
 void loop()
 {
   blink.on(500);
-  blonk.off(300);
+  blink.off(300);
 }
