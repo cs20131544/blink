@@ -1,7 +1,14 @@
-const char* host = "api.thingspeak.com";
-String url = "/update?api_key=G79FBGL6FYT8M08Y";  
+/***********************thingspeak*********************/
+//const char* host = "api.thingspeak.com";
+//String url = "/update?api_key=G79FBGL6FYT8M08Y";  
+//const int httpPort = 80;
+//int interval = 60000;
+/******************************************************/
+
+const char* host = "maker.ifttt.com";
+String url = "/trigger/temperature/with/key/tIPlVmZT0SbsGArH8vdSs/?value1=";  
 const int httpPort = 80;
-int interval = 60000;
+int interval = 5000;
 
 #include <ESP8266WiFi.h>
 #include <WiFiClientSecure.h>
@@ -12,7 +19,6 @@ int interval = 60000;
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
-
 const char* ssid = "iptime404";
 const char* password = "87567340";
 
@@ -20,7 +26,7 @@ String working() {
   float r ;
   sensors.requestTemperatures();
   r = sensors.getTempCByIndex(0);  
-
+  url = "/trigger/temperature/with/key/tIPlVmZT0SbsGArH8vdSs/?value1="+String(r);
   return(String("field1=")+String(r));
 }
 
@@ -28,6 +34,7 @@ void delivering(String payload) {
   WiFiClient client;
   Serial.print("connecting to ");
   Serial.println(host);
+  
   if (!client.connect(host, httpPort)) {
     Serial.print("connection failed: ");
     Serial.println(payload);
